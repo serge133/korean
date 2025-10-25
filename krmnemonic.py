@@ -57,7 +57,7 @@ class KoreanMnemonicsManager:
         else:
             anki_df['Front'] = anki_df['Korean Word']
             anki_df['Back'] = (
-                "Romanization" + anki_df['Romanization'] + "\n\n",
+                "Romanization: " + anki_df['Romanization'] + "\n\n" +
                 "Meaning: " + anki_df['Meaning'] + "\n\n" +
                 "Mnemonic: " + anki_df['Mnemonic'] + "\n\n" +
                 "Visual: " + anki_df['Visual'] + "\n\n" +
