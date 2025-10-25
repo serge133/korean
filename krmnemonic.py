@@ -43,7 +43,7 @@ class KoreanMnemonicsManager:
     def _save_dataframe(self):
         self.df.to_csv(self.csv_path, index=False)
 
-    def export_to_anki_csv(self, anki_csv_path='korean_mnemonics_for_anki.csv', reverse=False):
+    def export_to_anki_csv(self, anki_csv_path='exports/anki.csv', reverse=False):
         # Make a copy of the DataFrame and fill NaN values with empty strings
         anki_df = self.df.copy().fillna('')
         if reverse:
