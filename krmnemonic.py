@@ -20,7 +20,7 @@ class KoreanMnemonicsManager:
             return pd.DataFrame(columns=self.columns)
 
     def add_mnemonic(self, korean_word, romanization, meaning, mnemonic, visual, notes):
-        if self._is_duplicate(korean_word):
+        if self._is_duplicate(korean_word, meaning):
             print(f"'{korean_word}' already exists. Skipping.")
             return False
         new_entry = pd.DataFrame([[korean_word, romanization, meaning, mnemonic, visual, notes if notes else '', self.timestamp]], columns=self.columns)
@@ -40,8 +40,8 @@ class KoreanMnemonicsManager:
         for _, row in new_data.iterrows():
             self.add_mnemonic(**row.to_dict())
 
-    def _is_duplicate(self, korean_word):
-        return korean_word in self.df['Korean Word'].values
+    def _is_duplicate(self, korean_word, meaning):
+        return len(self.df[(self.df['Korean Word'] == korean_word) & (self.df['Meaning'] == meaning)]) > 0
 
     def _save_dataframe(self):
         self.df.to_csv(self.csv_path, index=False)
