@@ -1,5 +1,6 @@
 #!/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13
 import pandas as pd
+import numpy as np
 import os
 import json
 import argparse
@@ -94,6 +95,54 @@ class KoreanMnemonicsManager:
             print(f"'{row['Mnemonic']}'\n")
             print(f"{row['Visual']}\n")
             print(f"{row['Notes']}\n")
+    
+    def get_stats(self):
+        """Print statistics about the mnemonics collection."""
+        total_mnemonics = len(self.df)
+        unique_korean_words = self.df['Korean Word'].nunique()
+        unique_english_meanings = self.df['Meaning'].nunique()
+        missing_romanization = self.df['Romanization'].isna().sum()
+        missing_mnemonic = self.df['Mnemonic'].isna().sum()
+        missing_visual = self.df['Visual'].isna().sum()
+        missing_notes = self.df['Notes'].isna().sum()
+        most_recent_timestamp = self.df['Timestamp'].max()
+        oldest_timestamp = self.df['Timestamp'].min()
+
+
+        timestamps = self.df['Timestamp'].dropna()
+        # Check if 'timestamp' column exists
+        most_recent_date = "N/A"
+        variance_learning_times = "N/A"
+        frequency_per_day = "N/A"
+
+        if not timestamps.empty:
+            most_recent_date = datetime.fromtimestamp(most_recent_timestamp).strftime('%B %d, %Y at %I:%M:%S %p')
+
+            # Variance of learning times (in days)
+            learning_times_days = [(ts - oldest_timestamp) / 86400 for ts in timestamps]
+            variance_learning_times = f"{np.var(learning_times_days):.2f} days"
+
+            # Frequency of added words (words per day)
+            total_days = (most_recent_timestamp - oldest_timestamp) / 86400
+            frequency_per_day = f"{total_mnemonics / total_days:.2f} words/day" if total_days > 0 else "N/A"
+
+
+
+        stats_str = (
+            f"Total Mnemonics: {total_mnemonics}\n"
+            f"Unique Korean Words: {unique_korean_words}\n"
+            f"Unique English Meanings: {unique_english_meanings}\n"
+            f"Missing Romanization: {missing_romanization}\n"
+            f"Missing Mnemonic: {missing_mnemonic}\n"
+            f"Missing Visual: {missing_visual}\n"
+            f"Missing Notes: {missing_notes}\n"
+            f"Most Recent Date: {most_recent_date}\n"
+            f"Variance of Learning Times: {variance_learning_times}\n"
+            f"Frequency of Added Words: {frequency_per_day}"
+        )
+
+        print(stats_str)
+
 
     def show_all(self):
         print(self.df)
@@ -112,6 +161,7 @@ def main():
     parser.add_argument('--import_json', help="Import mnemonics from a JSON file.")
     parser.add_argument('--import_csv', help="Import mnemonics from a CSV file.")
     parser.add_argument('--recent', type=int, help="Get the most recently added mnemonics", default=0)
+    parser.add_argument('--stats', action='store_true', help="View stats on how many words you have learned and when.")
     args = parser.parse_args()
 
     manager = KoreanMnemonicsManager()
@@ -126,6 +176,8 @@ def main():
         manager.bulk_add_from_csv(args.import_csv)
     if args.recent:
         manager.get_recent(args.recent)
+    if args.stats:
+        manager.get_stats()
 
 if __name__ == "__main__":
     main()
