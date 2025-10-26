@@ -30,6 +30,9 @@ This guide provides a complete workflow for generating, managing, and studying K
 
 ## **Generating Mnemonics with the Agent**
 
+### Where is the agent located? 
+Located in Mistral AI Chat in the agents tab, called "Korean Mnemonic" 
+
 ### **How to Prompt the Agent**
 - **For a single mnemonic:**
   Type a Korean word (e.g., "영화").
