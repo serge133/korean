@@ -130,11 +130,6 @@ class KoreanMnemonicsManager:
             oldest_timestamp = study_session_timestamps.min()
             most_recent_date = datetime.fromtimestamp(most_recent_timestamp).strftime('%B %d, %Y at %I:%M:%S %p')
 
-            # Convert timestamps to days since the first entry
-            learning_times_days = [(ts - oldest_timestamp) / 86400 for ts in study_session_timestamps]
-
-            # Standard deviation of learning times
-            std_learning_times = f"{np.std(learning_times_days):.2f} days"
 
             # Frequency of added words (words per day)
             total_days = (most_recent_timestamp - oldest_timestamp) / 86400
@@ -154,9 +149,8 @@ class KoreanMnemonicsManager:
             f"Korean Words: {unique_korean_words}\n"
             f"English Meanings: {unique_english_meanings}\n"
             f"Number of study sessions: {num_study_sessions}\n"
-            f"Average days between consecutive study sessions: {avg_time_diff_between_study_session} Days\n"
+            f"Average days between consecutive study sessions: {avg_time_diff_between_study_session:.2f} Days\n"
             f"Most Recent Date: {most_recent_date}\n"
-            f"Standard Deviation of Learning Times: {std_learning_times}\n"
             f"Frequency of Added Words: {frequency_per_day} | {frequency_per_session}\n"
             f"Average Words Added Per Week: {learning_trend:.2f}\n"
         )
