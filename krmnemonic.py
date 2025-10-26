@@ -162,55 +162,11 @@ class KoreanMnemonicsManager:
         )
         print(stats_str)
 
-        return
-        """Print statistics about the mnemonics collection."""
-        total_mnemonics = len(self.df)
-        unique_korean_words = self.df['Korean Word'].nunique()
-        unique_english_meanings = self.df['Meaning'].nunique()
-        missing_notes = self.df['Notes'].isna().sum()
-        most_recent_timestamp = self.df['Timestamp'].max()
-        oldest_timestamp = self.df['Timestamp'].min()
-
-
-        timestamps = self.df['Timestamp'].dropna()
-        # Check if 'timestamp' column exists
-        most_recent_date = "N/A"
-        variance_learning_times = "N/A"
-        frequency_per_day = "N/A"
-
-        if not timestamps.empty:
-            most_recent_date = datetime.fromtimestamp(most_recent_timestamp).strftime('%B %d, %Y at %I:%M:%S %p')
-
-            # Variance of learning times (in days)
-            learning_times_days = [(ts - oldest_timestamp) / 86400 for ts in timestamps]
-            variance_learning_times = f"{np.std(learning_times_days):.2f} days"
-
-            # Frequency of added words (words per day)
-            total_days = (most_recent_timestamp - oldest_timestamp) / 86400
-            frequency_per_day = f"{total_mnemonics / total_days:.2f} words/day" if total_days > 0 else "N/A"
-
-
-
-        stats_str = (
-            f"Total Mnemonics: {total_mnemonics}\n"
-            f"Unique Korean Words: {unique_korean_words}\n"
-            f"Unique English Meanings: {unique_english_meanings}\n"
-            f"Missing Notes: {missing_notes}\n"
-            f"Most Recent Date: {most_recent_date}\n"
-            f"Variance of Learning Times: {variance_learning_times}\n"
-            f"Frequency of Added Words: {frequency_per_day}"
-        )
-
-        print(stats_str)
-
-
     def show_all(self):
         print(self.df)
 
 def main():
     # Prerequisites 
-    if not os.path.isdir(EXPORTS):
-        os.mkdir(EXPORTS)
     if not os.path.isdir(IMPORTS):
         os.mkdir(IMPORTS)
     
