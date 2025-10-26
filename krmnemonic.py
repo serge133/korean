@@ -3,12 +3,15 @@ import pandas as pd
 import os
 import json
 import argparse
+from datetime import datetime
 
 class KoreanMnemonicsManager:
     def __init__(self, csv_path='exports/korean_mnemonics.csv'):
         self.csv_path = csv_path
-        self.columns = ['Korean Word', 'Romanization', 'Meaning', 'Mnemonic', 'Visual', 'Notes']
+        self.columns = ['Korean Word', 'Romanization', 'Meaning', 'Mnemonic', 'Visual', 'Notes', 'Timestamp']
         self.df = self._load_or_create_dataframe()
+        self.df = self.df.sort_values(by='Timestamp', ascending=True) # Most recent at the end
+        self.timestamp = datetime.now().timestamp()
 
     def _load_or_create_dataframe(self):
         if os.path.exists(self.csv_path):
@@ -20,7 +23,7 @@ class KoreanMnemonicsManager:
         if self._is_duplicate(korean_word):
             print(f"'{korean_word}' already exists. Skipping.")
             return False
-        new_entry = pd.DataFrame([[korean_word, romanization, meaning, mnemonic, visual, notes if notes else '']], columns=self.columns)
+        new_entry = pd.DataFrame([[korean_word, romanization, meaning, mnemonic, visual, notes if notes else '', self.timestamp]], columns=self.columns)
         self.df = pd.concat([self.df, new_entry], ignore_index=True)
         self._save_dataframe()
         print(f"Added: {korean_word}")
@@ -42,6 +45,11 @@ class KoreanMnemonicsManager:
 
     def _save_dataframe(self):
         self.df.to_csv(self.csv_path, index=False)
+    
+    def get_recent(self, n: int = 5):
+        recent = self.df.tail(n)
+        for index, row in recent.iterrows():
+            self.recall_mnemonic(row['Korean Word'])
 
     def export_to_anki_csv(self, anki_csv_path='exports/anki.csv', reverse=False):
         # Make a copy of the DataFrame and fill NaN values with empty strings
@@ -99,22 +107,25 @@ def main():
     
     parser = argparse.ArgumentParser(description="Manage Korean mnemonics.")
     parser.add_argument('--recall', help="Recall a mnemonic by Korean or English word.")
-    parser.add_argument('--export', action='store_true', help="Export to Anki CSV.")
+    parser.add_argument('--anki', action='store_true', help="Export to Anki CSV.")
     parser.add_argument('--english_first', action='store_true', help="Reverse card order (English → Korean).")
     parser.add_argument('--import_json', help="Import mnemonics from a JSON file.")
     parser.add_argument('--import_csv', help="Import mnemonics from a CSV file.")
+    parser.add_argument('--recent', type=int, help="Get the most recently added mnemonics", default=0)
     args = parser.parse_args()
 
     manager = KoreanMnemonicsManager()
 
     if args.recall:
         manager.recall_mnemonic(args.recall)
-    if args.export:
+    if args.anki:
         manager.export_to_anki_csv(reverse=args.english_first)
     if args.import_json:
         manager.bulk_add_from_json(args.import_json)
     if args.import_csv:
         manager.bulk_add_from_csv(args.import_csv)
+    if args.recent:
+        manager.get_recent(args.recent)
 
 if __name__ == "__main__":
     main()
