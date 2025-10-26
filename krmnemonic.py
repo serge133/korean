@@ -1,15 +1,15 @@
 #!/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13
 import pandas as pd
 import numpy as np
-import os
+import os, shutil
 import json
 import argparse
 from datetime import datetime
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 IMPORTS = os.path.join(DIR, "imports")
-EXPORTS = os.path.join(DIR, "exports")
-EXPORT_FILE_PD = os.path.join(EXPORTS, "korean_mnemonics.csv")
+EXPORT_FILE_PD = os.path.join(DIR, "korean_mnemonics.csv")
+ANKI_CSV = f"anki_{datetime.now().timestamp()}.csv"
 
 class KoreanMnemonicsManager:
     def __init__(self, csv_path=EXPORT_FILE_PD):
@@ -35,7 +35,17 @@ class KoreanMnemonicsManager:
         return True
 
     def bulk_add_from_json(self, json_path):
-        with open(json_path, 'r', encoding='utf-8') as f:
+        file = os.path.basename(json_path)
+        target = os.path.join(IMPORTS, file)
+        # First move the file to the imports 
+        if os.path.isfile(target):
+            print("Warning: already added this file.")
+            return
+
+        shutil.move(json_path, target)
+        print(f"Moved {file} to imports")
+
+        with open(target, 'r', encoding='utf-8') as f:
             data = json.load(f)
         timestamp = data['timestamp']
         mnemonics = data['mnemonics']
@@ -53,7 +63,7 @@ class KoreanMnemonicsManager:
         for index, row in recent.iterrows():
             self.recall_mnemonic(row['Korean Word'])
 
-    def export_to_anki_csv(self, anki_csv_path='exports/anki.csv', reverse=False):
+    def export_to_anki_csv(self, anki_csv_path=ANKI_CSV, reverse=False):
         # Make a copy of the DataFrame and fill NaN values with empty strings
         anki_df = self.df.copy().fillna('')
         if reverse:
@@ -75,7 +85,7 @@ class KoreanMnemonicsManager:
             )
         anki_df = anki_df[['Front', 'Back']]
         anki_df.to_csv(anki_csv_path, index=False, header=False)
-        print(f"Exported to {anki_csv_path} {'(reversed)' if reverse else ''}.")
+        print(f"Exported to {anki_csv_path}{' (reversed)' if reverse else '.'}")
 
     def recall_mnemonic(self, word, case_sensitive=False):
         """
@@ -110,9 +120,6 @@ class KoreanMnemonicsManager:
         std_learning_times = "N/A"
         frequency_per_day = "N/A"
         frequency_per_session = "N/A"
-        avg_learning_gap = "N/A"
-        top_5_korean_words = "N/A"
-        top_5_english_meanings = "N/A"
         learning_trend = "N/A"
 
         timestamps = self.df['Timestamp'].dropna()
