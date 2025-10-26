@@ -1,218 +1,197 @@
-[
-    {
-        "korean_word": "음료수",
-        "romanization": "eumnyosu",
-        "meaning": "beverage/drink",
-        "mnemonic": "Um, need juice!",
-        "visual": "Picture yourself standing in front of a fridge, rubbing your throat, and saying, 'Um, need juice!' as you grab a cold bottle of your favorite drink.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "겨울",
-        "romanization": "gyeoul",
-        "meaning": "winter",
-        "mnemonic": "Go, you’ll freeze!",
-        "visual": "Imagine bundling up in a thick coat, stepping outside into the snow, and someone shouting, 'Go, you’ll freeze!' as the wind howls around you.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "매일",
-        "romanization": "maeil",
-        "meaning": "every day",
-        "mnemonic": "Mail arrives every day!",
-        "visual": "Picture yourself walking to your mailbox each morning, saying, 'Mail arrives every day!' as you pull out letters or packages.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "방학",
-        "romanization": "banghak",
-        "meaning": "vacation (school break)",
-        "mnemonic": "Bang! Hack the schedule—it’s vacation!",
-        "visual": "Imagine the last school bell ringing, you slam your books shut with a 'Bang!' and say, 'Hack the schedule—it’s vacation!' as you run out of the classroom.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "할머니",
-        "romanization": "halmeoni",
-        "meaning": "grandmother",
-        "mnemonic": "Halmoni’s hugs are warm and sweet!",
-        "visual": "Picture your grandmother welcoming you with open arms, her face lit up with a warm smile as she offers you homemade cookies.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "신기하다",
-        "romanization": "sin-gi-ha-da",
-        "meaning": "amazing/incredible",
-        "mnemonic": "Shiny geek had awe!",
-        "visual": "Imagine a 'shiny' gadget or magic trick making a 'geek' gasp in wonder, saying, 'Whoa, that’s awesome!' as their eyes sparkle with awe.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "주다",
-        "romanization": "juda",
-        "meaning": "to give",
-        "mnemonic": "Jewel for you—take it!",
-        "visual": "Picture yourself holding out a beautiful jewel in your palm, smiling as you say, 'Jewel for you—take it!' to a friend.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "아까",
-        "romanization": "akka",
-        "meaning": "a while ago/earlier",
-        "mnemonic": "Ah! Car keys—where’d I put them earlier?",
-        "visual": "Imagine patting your pockets frantically, saying, 'Ah! Car keys—where’d I put them earlier?' as you retrace your steps.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "지금",
-        "romanization": "jigeum",
-        "meaning": "now",
-        "mnemonic": "Jiggle your finger—do it now!",
-        "visual": "Picture someone jiggling their finger at you, saying, 'Jiggle your finger—do it now!' to get your attention.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "가다",
-        "romanization": "gada",
-        "meaning": "to go",
-        "mnemonic": "Got to go!",
-        "visual": "Imagine grabbing your bag, waving goodbye, and saying, 'Got to go!' as you rush out the door.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "지하철",
-        "romanization": "jihacheol",
-        "meaning": "subway",
-        "mnemonic": "Gee, hot train underground!",
-        "visual": "Picture yourself standing on a subway platform, feeling the rush of warm air as the train approaches.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "타다",
-        "romanization": "tada",
-        "meaning": "to ride/to burn",
-        "mnemonic": "Take a taxi, dah! / Touch a flame—ah, it’s hot!",
-        "visual": "Imagine hailing a taxi and jumping in / accidentally touching a hot stove and pulling your hand back.",
-        "notes": "Two meanings: riding a vehicle or burning.",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "적다",
-        "romanization": "jeokda",
-        "meaning": "to be few/little",
-        "mnemonic": "Just a few cookies left!",
-        "visual": "Imagine opening a cookie jar and seeing only two cookies left, saying, 'Just a few cookies left!' as you savor the last ones.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "고양이",
-        "romanization": "goyangi",
-        "meaning": "cat",
-        "mnemonic": "Go, yanky kitty!",
-        "visual": "Picture a cute, playful cat darting around the room, knocking things over.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "동물",
-        "romanization": "dongmul",
-        "meaning": "animal",
-        "mnemonic": "Dong! Moo—it’s an animal sound!",
-        "visual": "Picture a farm scene where a bell 'dong' rings, and you hear a cow 'moo' in the distance.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "놀다",
-        "romanization": "nolda",
-        "meaning": "to play",
-        "mnemonic": "Know how to laugh and play!",
-        "visual": "Imagine kids running around a playground, laughing and shouting, 'Know how to laugh and play!' as they enjoy their games.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "휴가",
-        "romanization": "hyuga",
-        "meaning": "vacation",
-        "mnemonic": "Huge break—time to relax!",
-        "visual": "Picture yourself packing a suitcase, smiling as you say, 'Huge break—time to relax!' while imagining a beach or mountain getaway.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "배고프다",
-        "romanization": "baegopeuda",
-        "meaning": "to be hungry",
-        "mnemonic": "Bay! Growling stomach—feed me!",
-        "visual": "Imagine clutching your stomach dramatically, hearing it growl, and saying, 'Bay! Growling stomach—feed me!' as you rush to the kitchen.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "주말",
-        "romanization": "jumal",
-        "meaning": "weekend",
-        "mnemonic": "Jewel of time—all mine!",
-        "visual": "Picture yourself lounging on a couch, grinning as you say, 'Jewel of time—all mine!' while holding your planner with the weekend circled.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "남자",
-        "romanization": "namja",
-        "meaning": "man",
-        "mnemonic": "Nam, ja! It’s a man!",
-        "visual": "Imagine pointing at someone and saying, 'Nam, ja! It’s a man!' as they walk by.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "여자",
-        "romanization": "yeoja",
-        "meaning": "woman",
-        "mnemonic": "Yo, jazz—she’s a woman!",
-        "visual": "Picture a woman walking confidently down the street, dressed stylishly, as someone admires her.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "깨끗하다",
-        "romanization": "kkaekkeuthada",
-        "meaning": "to be clean",
-        "mnemonic": "Crack the dirt—ah, it’s spotless!",
-        "visual": "Imagine scrubbing a surface, watching the dirt disappear, and saying, 'Crack the dirt—ah, it’s spotless!' as you admire the shiny result.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "린스",
-        "romanization": "rinseu",
-        "meaning": "rinse",
-        "mnemonic": "Rinse, please—smooth and clean!",
-        "visual": "Picture yourself in the shower, pouring conditioner into your hand and saying, 'Rinse, please—smooth and clean!' as you wash it out.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    },
-    {
-        "korean_word": "속옷",
-        "romanization": "sogot",
-        "meaning": "underwear",
-        "mnemonic": "So good—underneath!",
-        "visual": "Imagine picking out soft, cozy underwear from a drawer and saying, 'So good—underneath!' as you put it on.",
-        "notes": "",
-        "timestamp": 1761375600.0
-    }
-]
+{
+    "timestamp": 1761375600.0,
+    "mnemonics": [
+        {
+            "korean_word": "음료수",
+            "romanization": "eumnyosu",
+            "meaning": "beverage/drink",
+            "mnemonic": "Um, need juice!",
+            "visual": "Picture yourself standing in front of a fridge, rubbing your throat, and saying, 'Um, need juice!' as you grab a cold bottle of your favorite drink.",
+            "notes": ""
+        },
+        {
+            "korean_word": "겨울",
+            "romanization": "gyeoul",
+            "meaning": "winter",
+            "mnemonic": "Go, you’ll freeze!",
+            "visual": "Imagine bundling up in a thick coat, stepping outside into the snow, and someone shouting, 'Go, you’ll freeze!' as the wind howls around you.",
+            "notes": ""
+        },
+        {
+            "korean_word": "매일",
+            "romanization": "maeil",
+            "meaning": "every day",
+            "mnemonic": "Mail arrives every day!",
+            "visual": "Picture yourself walking to your mailbox each morning, saying, 'Mail arrives every day!' as you pull out letters or packages.",
+            "notes": ""
+        },
+        {
+            "korean_word": "방학",
+            "romanization": "banghak",
+            "meaning": "vacation (school break)",
+            "mnemonic": "Bang! Hack the schedule—it’s vacation!",
+            "visual": "Imagine the last school bell ringing, you slam your books shut with a 'Bang!' and say, 'Hack the schedule—it’s vacation!' as you run out of the classroom.",
+            "notes": ""
+        },
+        {
+            "korean_word": "할머니",
+            "romanization": "halmeoni",
+            "meaning": "grandmother",
+            "mnemonic": "Halmoni’s hugs are warm and sweet!",
+            "visual": "Picture your grandmother welcoming you with open arms, her face lit up with a warm smile as she offers you homemade cookies.",
+            "notes": ""
+        },
+        {
+            "korean_word": "신기하다",
+            "romanization": "sin-gi-ha-da",
+            "meaning": "amazing/incredible",
+            "mnemonic": "Shiny geek had awe!",
+            "visual": "Imagine a 'shiny' gadget or magic trick making a 'geek' gasp in wonder, saying, 'Whoa, that’s awesome!' as their eyes sparkle with awe.",
+            "notes": ""
+        },
+        {
+            "korean_word": "주다",
+            "romanization": "juda",
+            "meaning": "to give",
+            "mnemonic": "Jewel for you—take it!",
+            "visual": "Picture yourself holding out a beautiful jewel in your palm, smiling as you say, 'Jewel for you—take it!' to a friend.",
+            "notes": ""
+        },
+        {
+            "korean_word": "아까",
+            "romanization": "akka",
+            "meaning": "a while ago/earlier",
+            "mnemonic": "Ah! Car keys—where’d I put them earlier?",
+            "visual": "Imagine patting your pockets frantically, saying, 'Ah! Car keys—where’d I put them earlier?' as you retrace your steps.",
+            "notes": ""
+        },
+        {
+            "korean_word": "지금",
+            "romanization": "jigeum",
+            "meaning": "now",
+            "mnemonic": "Jiggle your finger—do it now!",
+            "visual": "Picture someone jiggling their finger at you, saying, 'Jiggle your finger—do it now!' to get your attention.",
+            "notes": ""
+        },
+        {
+            "korean_word": "가다",
+            "romanization": "gada",
+            "meaning": "to go",
+            "mnemonic": "Got to go!",
+            "visual": "Imagine grabbing your bag, waving goodbye, and saying, 'Got to go!' as you rush out the door.",
+            "notes": ""
+        },
+        {
+            "korean_word": "지하철",
+            "romanization": "jihacheol",
+            "meaning": "subway",
+            "mnemonic": "Gee, hot train underground!",
+            "visual": "Picture yourself standing on a subway platform, feeling the rush of warm air as the train approaches.",
+            "notes": ""
+        },
+        {
+            "korean_word": "타다",
+            "romanization": "tada",
+            "meaning": "to ride/to burn",
+            "mnemonic": "Take a taxi, dah! / Touch a flame—ah, it’s hot!",
+            "visual": "Imagine hailing a taxi and jumping in / accidentally touching a hot stove and pulling your hand back.",
+            "notes": "Two meanings: riding a vehicle or burning."
+        },
+        {
+            "korean_word": "적다",
+            "romanization": "jeokda",
+            "meaning": "to be few/little",
+            "mnemonic": "Just a few cookies left!",
+            "visual": "Imagine opening a cookie jar and seeing only two cookies left, saying, 'Just a few cookies left!' as you savor the last ones.",
+            "notes": ""
+        },
+        {
+            "korean_word": "고양이",
+            "romanization": "goyangi",
+            "meaning": "cat",
+            "mnemonic": "Go, yanky kitty!",
+            "visual": "Picture a cute, playful cat darting around the room, knocking things over.",
+            "notes": ""
+        },
+        {
+            "korean_word": "동물",
+            "romanization": "dongmul",
+            "meaning": "animal",
+            "mnemonic": "Dong! Moo—it’s an animal sound!",
+            "visual": "Picture a farm scene where a bell 'dong' rings, and you hear a cow 'moo' in the distance.",
+            "notes": ""
+        },
+        {
+            "korean_word": "놀다",
+            "romanization": "nolda",
+            "meaning": "to play",
+            "mnemonic": "Know how to laugh and play!",
+            "visual": "Imagine kids running around a playground, laughing and shouting, 'Know how to laugh and play!' as they enjoy their games.",
+            "notes": ""
+        },
+        {
+            "korean_word": "휴가",
+            "romanization": "hyuga",
+            "meaning": "vacation",
+            "mnemonic": "Huge break—time to relax!",
+            "visual": "Picture yourself packing a suitcase, smiling as you say, 'Huge break—time to relax!' while imagining a beach or mountain getaway.",
+            "notes": ""
+        },
+        {
+            "korean_word": "배고프다",
+            "romanization": "baegopeuda",
+            "meaning": "to be hungry",
+            "mnemonic": "Bay! Growling stomach—feed me!",
+            "visual": "Imagine clutching your stomach dramatically, hearing it growl, and saying, 'Bay! Growling stomach—feed me!' as you rush to the kitchen.",
+            "notes": ""
+        },
+        {
+            "korean_word": "주말",
+            "romanization": "jumal",
+            "meaning": "weekend",
+            "mnemonic": "Jewel of time—all mine!",
+            "visual": "Picture yourself lounging on a couch, grinning as you say, 'Jewel of time—all mine!' while holding your planner with the weekend circled.",
+            "notes": ""
+        },
+        {
+            "korean_word": "남자",
+            "romanization": "namja",
+            "meaning": "man",
+            "mnemonic": "Nam, ja! It’s a man!",
+            "visual": "Imagine pointing at someone and saying, 'Nam, ja! It’s a man!' as they walk by.",
+            "notes": ""
+        },
+        {
+            "korean_word": "여자",
+            "romanization": "yeoja",
+            "meaning": "woman",
+            "mnemonic": "Yo, jazz—she’s a woman!",
+            "visual": "Picture a woman walking confidently down the street, dressed stylishly, as someone admires her.",
+            "notes": ""
+        },
+        {
+            "korean_word": "깨끗하다",
+            "romanization": "kkaekkeuthada",
+            "meaning": "to be clean",
+            "mnemonic": "Crack the dirt—ah, it’s spotless!",
+            "visual": "Imagine scrubbing a surface, watching the dirt disappear, and saying, 'Crack the dirt—ah, it’s spotless!' as you admire the shiny result.",
+            "notes": ""
+        },
+        {
+            "korean_word": "린스",
+            "romanization": "rinseu",
+            "meaning": "rinse",
+            "mnemonic": "Rinse, please—smooth and clean!",
+            "visual": "Picture yourself in the shower, pouring conditioner into your hand and saying, 'Rinse, please—smooth and clean!' as you wash it out.",
+            "notes": ""
+        },
+        {
+            "korean_word": "속옷",
+            "romanization": "sogot",
+            "meaning": "underwear",
+            "mnemonic": "So good—underneath!",
+            "visual": "Imagine picking out soft, cozy underwear from a drawer and saying, 'So good—underneath!' as you put it on.",
+            "notes": ""
+        }
+    ]
+}

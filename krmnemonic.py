@@ -6,13 +6,17 @@ import json
 import argparse
 from datetime import datetime
 
+DIR = os.path.dirname(os.path.abspath(__file__))
+IMPORTS = os.path.join(DIR, "imports")
+EXPORTS = os.path.join(DIR, "exports")
+EXPORT_FILE_PD = os.path.join(EXPORTS, "korean_mnemonics.csv")
+
 class KoreanMnemonicsManager:
-    def __init__(self, csv_path='exports/korean_mnemonics.csv'):
+    def __init__(self, csv_path=EXPORT_FILE_PD):
         self.csv_path = csv_path
         self.columns = ['Korean Word', 'Romanization', 'Meaning', 'Mnemonic', 'Visual', 'Notes', 'Timestamp']
         self.df = self._load_or_create_dataframe()
         self.df = self.df.sort_values(by='Timestamp', ascending=True) # Most recent at the end
-        self.timestamp = datetime.now().timestamp()
 
     def _load_or_create_dataframe(self):
         if os.path.exists(self.csv_path):
@@ -20,11 +24,11 @@ class KoreanMnemonicsManager:
         else:
             return pd.DataFrame(columns=self.columns)
 
-    def add_mnemonic(self, korean_word, romanization, meaning, mnemonic, visual, notes):
+    def add_mnemonic(self, korean_word, romanization, meaning, mnemonic, visual, notes, timestamp):
         if self._is_duplicate(korean_word, meaning):
             print(f"'{korean_word}' already exists. Skipping.")
             return False
-        new_entry = pd.DataFrame([[korean_word, romanization, meaning, mnemonic, visual, notes if notes else '', self.timestamp]], columns=self.columns)
+        new_entry = pd.DataFrame([[korean_word, romanization, meaning, mnemonic, visual, notes if notes else '', timestamp]], columns=self.columns)
         self.df = pd.concat([self.df, new_entry], ignore_index=True)
         self._save_dataframe()
         print(f"Added: {korean_word}")
@@ -33,13 +37,10 @@ class KoreanMnemonicsManager:
     def bulk_add_from_json(self, json_path):
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        for entry in data:
-            self.add_mnemonic(**entry)
-
-    def bulk_add_from_csv(self, csv_path):
-        new_data = pd.read_csv(csv_path)
-        for _, row in new_data.iterrows():
-            self.add_mnemonic(**row.to_dict())
+        timestamp = data['timestamp']
+        mnemonics = data['mnemonics']
+        for entry in mnemonics:
+            self.add_mnemonic(**entry, timestamp=timestamp)
 
     def _is_duplicate(self, korean_word, meaning):
         return len(self.df[(self.df['Korean Word'] == korean_word) & (self.df['Meaning'] == meaning)]) > 0
@@ -73,7 +74,7 @@ class KoreanMnemonicsManager:
                 "Notes: " + anki_df['Notes']
             )
         anki_df = anki_df[['Front', 'Back']]
-        anki_df.to_csv(anki_csv_path, index=False)
+        anki_df.to_csv(anki_csv_path, index=False, header=False)
         print(f"Exported to {anki_csv_path} {'(reversed)' if reverse else ''}.")
 
     def recall_mnemonic(self, word, case_sensitive=False):
@@ -97,13 +98,68 @@ class KoreanMnemonicsManager:
             print(f"{row['Notes']}\n")
     
     def get_stats(self):
+        """Print comprehensive statistics about the mnemonics collection."""
+        total_mnemonics = len(self.df)
+        unique_korean_words = self.df['Korean Word'].nunique()
+        unique_english_meanings = self.df['Meaning'].nunique()
+        missing_notes = self.df['Notes'].isna().sum()
+
+        # Initialize stats
+        num_study_sessions = 0
+        most_recent_date = "N/A"
+        std_learning_times = "N/A"
+        frequency_per_day = "N/A"
+        frequency_per_session = "N/A"
+        avg_learning_gap = "N/A"
+        top_5_korean_words = "N/A"
+        top_5_english_meanings = "N/A"
+        learning_trend = "N/A"
+
+        timestamps = self.df['Timestamp'].dropna()
+        if not timestamps.empty:
+            study_session_timestamps = np.sort(np.unique(timestamps))
+            num_study_sessions = len(study_session_timestamps)
+            most_recent_timestamp = study_session_timestamps.max()
+            oldest_timestamp = study_session_timestamps.min()
+            most_recent_date = datetime.fromtimestamp(most_recent_timestamp).strftime('%B %d, %Y at %I:%M:%S %p')
+
+            # Convert timestamps to days since the first entry
+            learning_times_days = [(ts - oldest_timestamp) / 86400 for ts in study_session_timestamps]
+
+            # Standard deviation of learning times
+            std_learning_times = f"{np.std(learning_times_days):.2f} days"
+
+            # Frequency of added words (words per day)
+            total_days = (most_recent_timestamp - oldest_timestamp) / 86400
+            frequency_per_day = f"{total_mnemonics / total_days:.2f} words/day" if total_days > 0 else "N/A"
+            frequency_per_session = f"{total_mnemonics / num_study_sessions:.2f} words/session" if num_study_sessions > 0 else "N/A"
+
+            # Average gap between learning new words
+            avg_time_diff_between_study_session = np.average(np.diff(study_session_timestamps / 86400))
+
+            # Learning trend (words added per week)
+            self.df['date'] = pd.to_datetime(self.df['Timestamp'], unit='s')
+            words_per_week = self.df.set_index('date').resample('W').size()
+            learning_trend = words_per_week.mean()
+
+        stats_str = (
+            f"Total Mnemonics: {total_mnemonics}\n"
+            f"Korean Words: {unique_korean_words}\n"
+            f"English Meanings: {unique_english_meanings}\n"
+            f"Number of study sessions: {num_study_sessions}\n"
+            f"Average days between consecutive study sessions: {avg_time_diff_between_study_session} Days\n"
+            f"Most Recent Date: {most_recent_date}\n"
+            f"Standard Deviation of Learning Times: {std_learning_times}\n"
+            f"Frequency of Added Words: {frequency_per_day} | {frequency_per_session}\n"
+            f"Average Words Added Per Week: {learning_trend:.2f}\n"
+        )
+        print(stats_str)
+
+        return
         """Print statistics about the mnemonics collection."""
         total_mnemonics = len(self.df)
         unique_korean_words = self.df['Korean Word'].nunique()
         unique_english_meanings = self.df['Meaning'].nunique()
-        missing_romanization = self.df['Romanization'].isna().sum()
-        missing_mnemonic = self.df['Mnemonic'].isna().sum()
-        missing_visual = self.df['Visual'].isna().sum()
         missing_notes = self.df['Notes'].isna().sum()
         most_recent_timestamp = self.df['Timestamp'].max()
         oldest_timestamp = self.df['Timestamp'].min()
@@ -120,7 +176,7 @@ class KoreanMnemonicsManager:
 
             # Variance of learning times (in days)
             learning_times_days = [(ts - oldest_timestamp) / 86400 for ts in timestamps]
-            variance_learning_times = f"{np.var(learning_times_days):.2f} days"
+            variance_learning_times = f"{np.std(learning_times_days):.2f} days"
 
             # Frequency of added words (words per day)
             total_days = (most_recent_timestamp - oldest_timestamp) / 86400
@@ -132,9 +188,6 @@ class KoreanMnemonicsManager:
             f"Total Mnemonics: {total_mnemonics}\n"
             f"Unique Korean Words: {unique_korean_words}\n"
             f"Unique English Meanings: {unique_english_meanings}\n"
-            f"Missing Romanization: {missing_romanization}\n"
-            f"Missing Mnemonic: {missing_mnemonic}\n"
-            f"Missing Visual: {missing_visual}\n"
             f"Missing Notes: {missing_notes}\n"
             f"Most Recent Date: {most_recent_date}\n"
             f"Variance of Learning Times: {variance_learning_times}\n"
@@ -149,17 +202,16 @@ class KoreanMnemonicsManager:
 
 def main():
     # Prerequisites 
-    if not os.path.isdir("exports"):
-        os.mkdir("exports")
-    if not os.path.isdir("imports"):
-        os.mkdir("imports")
+    if not os.path.isdir(EXPORTS):
+        os.mkdir(EXPORTS)
+    if not os.path.isdir(IMPORTS):
+        os.mkdir(IMPORTS)
     
     parser = argparse.ArgumentParser(description="Manage Korean mnemonics.")
     parser.add_argument('--recall', help="Recall a mnemonic by Korean or English word.")
     parser.add_argument('--anki', action='store_true', help="Export to Anki CSV.")
     parser.add_argument('--english_first', action='store_true', help="Reverse card order (English → Korean).")
-    parser.add_argument('--import_json', help="Import mnemonics from a JSON file.")
-    parser.add_argument('--import_csv', help="Import mnemonics from a CSV file.")
+    parser.add_argument('--add', help="Import mnemonics from a JSON file.")
     parser.add_argument('--recent', type=int, help="Get the most recently added mnemonics", default=0)
     parser.add_argument('--stats', action='store_true', help="View stats on how many words you have learned and when.")
     args = parser.parse_args()
@@ -170,10 +222,8 @@ def main():
         manager.recall_mnemonic(args.recall)
     if args.anki:
         manager.export_to_anki_csv(reverse=args.english_first)
-    if args.import_json:
-        manager.bulk_add_from_json(args.import_json)
-    if args.import_csv:
-        manager.bulk_add_from_csv(args.import_csv)
+    if args.add:
+        manager.bulk_add_from_json(args.add)
     if args.recent:
         manager.get_recent(args.recent)
     if args.stats:
