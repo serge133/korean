@@ -100,12 +100,17 @@ class KoreanMnemonicsManager:
             return
 
         matches = pd.concat([korean_matches, english_matches]).drop_duplicates()
+        cur_row = None
+        i = 0
 
         for _, row in matches.iterrows():
             print(f"For '{row['Korean Word']} ({row['Romanization']})', the Korean word for '{row['Meaning']}', here’s a mnemonic:\n")
             print(f"'{row['Mnemonic']}'\n")
             print(f"{row['Visual']}\n")
             print(f"{row['Notes']}\n")
+            cur_row = row
+            i += 1
+        return cur_row if i == 1 else None
     
     def get_stats(self):
         """Print comprehensive statistics about the mnemonics collection."""
@@ -159,6 +164,23 @@ class KoreanMnemonicsManager:
     def show_all(self):
         print(self.df)
 
+    def test(self, n: int, english_first: bool):
+        """Returns n random korean words (english if english_first flag enabled)"""
+        sample = self.df.sample(n = n if n > 0 else len(self.df))
+        print(len(sample), len(self.df))
+        for i, row in sample.iterrows():
+            if english_first:
+                meaning = row['Meaning']
+                print(meaning)
+                _ = input("Press Enter to Reveal")
+                self.recall_mnemonic(meaning)
+            else:
+                krword = row['Korean Word']
+                print(krword)
+                _ = input("Press Enter to Reveal")
+                self.recall_mnemonic(krword)
+            print('-'*100)
+
 def main():
     # Prerequisites 
     if not os.path.isdir(IMPORTS):
@@ -171,6 +193,7 @@ def main():
     parser.add_argument('--add', help="Import mnemonics from a JSON file.")
     parser.add_argument('--recent', type=int, help="Get the most recently added mnemonics", default=0)
     parser.add_argument('--stats', action='store_true', help="View stats on how many words you have learned and when.")
+    parser.add_argument('--test', type=int, help="Randomly returns n korean words (use --english_first for english | use -1 for all)", default=0)
     args = parser.parse_args()
 
     manager = KoreanMnemonicsManager()
@@ -185,6 +208,8 @@ def main():
         manager.get_recent(args.recent)
     if args.stats:
         manager.get_stats()
+    if args.test:
+        manager.test(args.test, args.english_first)
 
 if __name__ == "__main__":
     main()
