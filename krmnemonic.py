@@ -51,6 +51,7 @@ class KoreanMnemonicsManager:
         mnemonics = data['mnemonics']
         for entry in mnemonics:
             self.add_mnemonic(**entry, timestamp=timestamp)
+        print(f"Added {len(mnemonics)} new words!")
 
     def _is_duplicate(self, korean_word, meaning):
         return len(self.df[(self.df['Korean Word'] == korean_word) & (self.df['Meaning'] == meaning)]) > 0
