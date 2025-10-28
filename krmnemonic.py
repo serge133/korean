@@ -168,7 +168,7 @@ class KoreanMnemonicsManager:
     def test(self, n: int, english_first: bool):
         """Returns n random korean words (english if english_first flag enabled)"""
         sample = self.df.sample(n = n if n > 0 else len(self.df))
-        print(len(sample), len(self.df))
+        print("Chosen: ", len(sample), "Total: ", len(self.df))
         for i, row in sample.iterrows():
             if english_first:
                 meaning = row['Meaning']
