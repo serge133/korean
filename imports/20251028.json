@@ -1,5 +1,5 @@
 {
-  "timestamp": 1761710452.639804,
+  "timestamp": 1761710738.440558,
   "mnemonics": [
     {
       "korean_word": "귀고리",
@@ -22,7 +22,7 @@
       "romanization": "hoesawon",
       "meaning": "office worker",
       "mnemonic": "Hoe-saw won the office job!",
-      "visual": "Someone using a 'hoe' to 'saw' through paperwork, then 'won' the promotion to become the ultimate 'office worker.'",
+      "visual": "Imagine someone using a 'hoe' to 'saw' through paperwork, and then 'won' the promotion to become the ultimate 'office worker.'",
       "notes": "'회사' means 'company,' and '원' means 'member' or 'employee.'"
     },
     {
@@ -30,7 +30,7 @@
       "romanization": "oneul",
       "meaning": "today",
       "mnemonic": "Oh, null—it’s today!",
-      "visual": "Waking up, looking at your calendar, and saying, 'Oh, null! Everything’s due today!'",
+      "visual": "Imagine waking up, looking at your calendar, and saying, 'Oh, null! Everything’s due today!'",
       "notes": "'늘' can also mean 'always,' but here, think of it as 'now-ull'—as in, 'Oh, now it’s today!'"
     },
     {
@@ -38,7 +38,7 @@
       "romanization": "saengil",
       "meaning": "birthday",
       "mnemonic": "Sing hill—it’s your birthday!",
-      "visual": "Standing on a hill, singing at the top of your lungs because it’s your birthday.",
+      "visual": "Imagine yourself standing on a hill, singing at the top of your lungs because it’s your birthday!",
       "notes": "'생' means 'life' or 'birth,' and '일' means 'day.'"
     },
     {
@@ -46,7 +46,7 @@
       "romanization": "gyosil",
       "meaning": "classroom",
       "mnemonic": "Geo-sill—where the teacher says 'Silence!'",
-      "visual": "Walking into a 'geo-sill' room where the teacher yells, 'Silence!'",
+      "visual": "Imagine walking into a 'geo-sill' room where the teacher immediately yells, 'Silence!'",
       "notes": "'교' relates to 'teaching,' and '실' can mean 'room.'"
     },
     {
@@ -54,7 +54,7 @@
       "romanization": "uri",
       "meaning": "we (informal)",
       "mnemonic": "Oo-ree? We’re a team!",
-      "visual": "Best friends huddling together, shouting 'Oo-ree!' like a team cheer.",
+      "visual": "Imagine your best friends huddling together, shouting 'Oo-ree!' like a team cheer.",
       "notes": "'우리' is for your close-knit crew."
     },
     {
@@ -62,7 +62,7 @@
       "romanization": "jeohui",
       "meaning": "we (polite)",
       "mnemonic": "Jeo-hui? We’re the humble squad!",
-      "visual": "A group bowing politely, saying 'Jeo-hui!' to show respect.",
+      "visual": "Picture a group bowing politely, saying 'Jeo-hui!' to show respect.",
       "notes": "'저희' is for the polite, respectful group."
     },
     {
@@ -70,7 +70,7 @@
       "romanization": "meokda",
       "meaning": "to eat",
       "mnemonic": "Muck-da—dig in and eat!",
-      "visual": "Sitting at a table piled with food, and someone yells, 'Muck-da!' as you all dive in with spoons.",
+      "visual": "Imagine sitting at a table piled with food, and someone yells, 'Muck-da!' as you all dive in with spoons.",
       "notes": "Focus on '먹'—it’s all about that 'muck' (food) action!"
     },
     {
@@ -78,7 +78,7 @@
       "romanization": "chingu",
       "meaning": "friend",
       "mnemonic": "Cheen-goo—your ride-or-die friend!",
-      "visual": "Your best friend covering you in 'cheen-goo' (glittery, sticky glue) because you’re stuck together forever.",
+      "visual": "Imagine your best friend covering you in 'cheen-goo' (glittery, sticky glue) because you’re stuck together forever.",
       "notes": "'친' means 'close' or 'intimate,' and '구' can mean 'help' or 'save.'"
     },
     {
@@ -86,15 +86,15 @@
       "romanization": "norae",
       "meaning": "song",
       "mnemonic": "Noraebang—sing your heart out!",
-      "visual": "In a noraebang (Korean karaoke room), belting out a 'note-ray' of pure song.",
-      "notes": "'노래' is what you sing in a noraebang!"
+      "visual": "Picture yourself in a noraebang (Korean karaoke room), grabbing the mic and belting out a 'note-ray' of pure song.",
+      "notes": "'노래' is what you sing in a noraebang—so every time you think of karaoke, you’ll remember '노래' means 'song'!"
     },
     {
       "korean_word": "춤",
       "romanization": "chum",
       "meaning": "dance",
       "mnemonic": "Chum—shake your bum!",
-      "visual": "Someone yelling 'Chum!' as they start dancing wildly, shaking everything—especially their bum.",
+      "visual": "Imagine someone yelling 'Chum!' as they start dancing wildly, shaking everything—especially their bum!",
       "notes": "The word itself sounds like the rhythm of a fun, bouncy beat—'chum-chum-chum!'"
     },
     {
@@ -102,7 +102,7 @@
       "romanization": "chukahada",
       "meaning": "to congratulate",
       "mnemonic": "Chews-ka-ha-da—throw confetti and celebrate!",
-      "visual": "Someone 'chewing' on a party popper, shouting 'Ha!' as confetti explodes everywhere.",
+      "visual": "Picture someone 'chewing' on a party popper, shouting 'Ha!' as confetti explodes everywhere.",
       "notes": "'축하' is the noun for 'congratulations.'"
     },
     {
@@ -110,72 +110,72 @@
       "romanization": "mannada",
       "meaning": "to meet",
       "mnemonic": "Man-nada—let’s meet, man!",
-      "visual": "Bumping into a friend on the street and saying, 'Man, nah—let’s meet up!'",
-      "notes": "'만' can also mean '10,000,' but here, think of it as 'many' opportunities to 'meet' new people!"
+      "visual": "Imagine bumping into a friend on the street and saying, 'Man, nah—let’s meet up!'",
+      "notes": "'만' also means '10,000,' but here, think of it as 'many' opportunities to 'meet' new people!"
     },
     {
       "korean_word": "재미있다",
       "romanization": "jaemiitda",
       "meaning": "to be fun/interesting",
       "mnemonic": "Jamming-it-da—this is so fun!",
-      "visual": "Someone at a party shouting, 'We’re jamming it—this is SO fun!'",
-      "notes": "'재미' means 'fun,' and '있다' means 'to have.'"
+      "visual": "Imagine someone at a party shouting, 'We’re jamming it—this is SO fun!'",
+      "notes": "'재미' means 'fun,' and '있다' means 'to have.' So, '재미있다' is literally 'has fun'—like 'jamming-it'!"
     },
     {
       "korean_word": "하루",
       "romanization": "haru",
       "meaning": "one day",
       "mnemonic": "Ha-roo—just one day!",
-      "visual": "A kangaroo hopping past you, saying 'Ha-roo!' as it points to the sunrise and sunset.",
-      "notes": "'하' as 'ah' (a breath for a new day) and '루' as the 'rue' (street) you walk every day."
+      "visual": "Imagine a kangaroo hopping past you, saying 'Ha-roo!' as it points to the sunrise and sunset—representing 'one day' from start to finish.",
+      "notes": "Think of 'ha' as 'ah' (a breath for a new day) and 'roo' as the 'rue' (French for 'street') you walk every day."
     },
     {
       "korean_word": "바다",
       "romanization": "bada",
       "meaning": "sea/ocean",
       "mnemonic": "Bada-bing, ocean swing!",
-      "visual": "A rat pack-style singer pointing at the ocean, saying 'Bada-bing!' as the waves swing in rhythm.",
-      "notes": "Think of 'bada' as the sound of waves—'bah-dah, bah-dah.'"
+      "visual": "Imagine a rat pack-style singer pointing at the ocean, saying 'Bada-bing!' as the waves swing in rhythm.",
+      "notes": "Think of 'bada' as the sound of waves—'bah-dah, bah-dah'—and you’re instantly at the beach!"
     },
     {
       "korean_word": "더럽다",
       "romanization": "deoreopda",
       "meaning": "to be dirty",
       "mnemonic": "Duh-rup-da—that’s disgusting!",
-      "visual": "Stepping on something sticky and saying, 'Duh-rup! Eww!' as you scrape it off your shoe.",
-      "notes": "Focus on '더럽'—it’s all about that 'duh-rup' reaction!"
+      "visual": "Imagine stepping on something sticky and saying, 'Duh-rup! Eww!' as you scrape it off your shoe.",
+      "notes": "The '다' is just the verb ending, so focus on '더럽'—it’s all about that 'duh-rup' reaction!"
     },
     {
       "korean_word": "걷다",
       "romanization": "geotda",
       "meaning": "to walk",
       "mnemonic": "Got-da—start your stride!",
-      "visual": "Lacing up your sneakers, standing tall, and saying, 'Got-da!' as you take your first confident step.",
-      "notes": "'Got' as 'go time'—so 'got-da' = 'time to walk'!"
+      "visual": "Imagine lacing up your sneakers, standing tall, and saying, 'Got-da!' as you take your first confident step.",
+      "notes": "Think of 'got' as 'go time'—so 'got-da' = 'time to walk'!"
     },
     {
       "korean_word": "식당",
       "romanization": "sikdang",
       "meaning": "restaurant",
       "mnemonic": "Seek-dang—find the food spot!",
-      "visual": "Wandering the streets, 'seeking' out the best smells, and then shouting 'Dang!' when you find the perfect restaurant.",
-      "notes": "'식' relates to 'food,' and '당' can remind you of the 'ding' of a bell when your order’s ready."
+      "visual": "Picture yourself wandering the streets, 'seeking' out the best smells, and then shouting 'Dang!' when you find the perfect 'restaurant'!",
+      "notes": "'식' relates to 'food' (like in '식사,' meaning 'meal'), and '당' can remind you of the 'ding' of a bell when your order’s ready."
     },
     {
       "korean_word": "맛있다",
       "romanization": "masitda",
       "meaning": "to be delicious",
       "mnemonic": "Ma-shit-da—this tastes amazing!",
-      "visual": "Taking a bite of something so good, you blurt out, 'Ma-shit! This is delicious!'",
-      "notes": "'맛' means 'taste' or 'flavor,' and '있다' means 'to have.'"
+      "visual": "Imagine taking a bite of something so good, you blurt out, 'Ma-shit! This is delicious!'",
+      "notes": "'맛' means 'taste' or 'flavor,' and '있다' means 'to have.' So, '맛있다' is literally 'has taste'—as in 'ma-shit-da' = 'it’s delicious'!"
     },
     {
       "korean_word": "음식",
       "romanization": "eumsik",
       "meaning": "food",
       "mnemonic": "Um-sik—nom nom time!",
-      "visual": "Sitting at a table, rubbing your belly, and saying, 'Um… sik! This food is amazing!'",
-      "notes": "'식' relates to 'eating' or 'meals.'"
+      "visual": "Picture yourself sitting at a table, rubbing your belly, and saying, 'Um… sik! This food is amazing!'",
+      "notes": "'식' relates to 'eating' or 'meals,' so '음식' is all about that 'um-sik' (yummy food) moment!"
     }
   ]
 }
