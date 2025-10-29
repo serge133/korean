@@ -95,6 +95,7 @@ class KoreanMnemonicsManager:
         Recall and print mnemonics matching the subtext in Korean or English.
         Set case_sensitive=True for case-sensitive matching.
         """
+        print(DIVIDER)
         korean_matches = self.df[self.df['Korean Word'].str.contains(word, case=case_sensitive, na=False)]
         english_matches = self.df[self.df['Meaning'].str.contains(word, case=case_sensitive, na=False)]
 
@@ -222,7 +223,7 @@ def main():
         os.mkdir(IMPORTS)
     
     parser = argparse.ArgumentParser(description="Manage Korean mnemonics.")
-    parser.add_argument('-r', '--recall', help="Recall a mnemonic by Korean or English word.")
+    parser.add_argument("recall", nargs="*", help="Recall a mnemonic by Korean or English word. Space-seperate list of words or phrases (wrap with quotes)")
     parser.add_argument('--anki', action='store_true', help="Export to Anki CSV.")
     parser.add_argument('-e', '--english_first', action='store_true', help="Reverse card order (English → Korean).")
     parser.add_argument('-a', '--add', help="Import mnemonics from a JSON file.")
@@ -237,12 +238,22 @@ def main():
 
     manager = KoreanMnemonicsManager()
 
+
+    if args.recall:
+        num_found = 0
+        for phrase in args.recall:
+            found = manager.recall_mnemonic(phrase)
+            num_found = num_found + 1 if found is not None else 0
+
+        print(DIVIDER)
+        print(f"Found {num_found} words!")
+        return
+    
+    # Optional addition output
     if args.stats:
         manager.get_stats()
 
-    if args.recall:
-        manager.recall_mnemonic(args.recall)
-    elif args.anki:
+    if args.anki:
         manager.export_to_anki_csv(reverse=args.english_first)
     elif args.add:
         manager.bulk_add_from_json(args.add)
