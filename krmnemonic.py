@@ -10,6 +10,7 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 IMPORTS = os.path.join(DIR, "imports")
 EXPORT_FILE_PD = os.path.join(DIR, "korean_mnemonics.csv")
 ANKI_CSV = f"anki_{datetime.now().timestamp()}.csv"
+DIVIDER = '\n' + ('-' * 100) + '\n'
 
 class KoreanMnemonicsManager:
     def __init__(self, csv_path=EXPORT_FILE_PD):
@@ -59,9 +60,10 @@ class KoreanMnemonicsManager:
     def _save_dataframe(self):
         self.df.to_csv(self.csv_path, index=False)
     
-    def get_recent(self, n: int = 5):
+    def get_last(self, n: int = 5):
         recent = self.df.tail(n)
-        for index, row in recent.iterrows():
+        for _, row in recent.iterrows():
+            print(DIVIDER)
             self.recall_mnemonic(row['Korean Word'])
 
     def export_to_anki_csv(self, anki_csv_path=ANKI_CSV, reverse=False):
@@ -118,7 +120,6 @@ class KoreanMnemonicsManager:
         total_mnemonics = len(self.df)
         unique_korean_words = self.df['Korean Word'].nunique()
         unique_english_meanings = self.df['Meaning'].nunique()
-        missing_notes = self.df['Notes'].isna().sum()
 
         # Initialize stats
         num_study_sessions = 0
@@ -165,10 +166,43 @@ class KoreanMnemonicsManager:
     def show_all(self):
         print(self.df)
 
-    def test(self, n: int, english_first: bool):
-        """Returns n random korean words (english if english_first flag enabled)"""
-        sample = self.df.sample(n = n if n > 0 else len(self.df))
-        print("Chosen: ", len(sample), "Total: ", len(self.df))
+    def test(self, n: int, english_first: bool, bias: float = 0.0):
+        """
+        Returns n random korean words (english if english_first flag enabled),
+        with optional bias towards newer or older words.
+
+        Args:
+            n: Number of words to sample.
+            english_first: If True, show English first.
+            bias: Float between -1 and 1.
+                -1: Favor older words.
+                0: Uniform sampling.
+                1: Favor newer words.
+        """
+        # Normalize timestamps to [0, 1] range
+        timestamps = self.df['Timestamp']
+        min_ts, max_ts = timestamps.min(), timestamps.max()
+        normalized_ts = (timestamps - min_ts) / (max_ts - min_ts)
+
+        # Calculate weights based on bias
+        if bias > 0:
+            weights = normalized_ts ** bias
+        elif bias < 0:
+            weights = (1 - normalized_ts) ** (-bias)
+        else:
+            weights = np.ones(len(timestamps))
+
+        # Normalize weights to sum to 1
+        weights = weights / weights.sum()
+        sample = self.df.sample(n=n if n > 0 else len(self.df), weights=weights)
+
+        bias_comment = "Uniform Sampling"
+        if bias > 0:
+            bias_comment = "Favor Newer Words"
+        elif bias < 0:
+            bias_comment = "Favor Older Words"
+
+        print(f"Bias: {bias} ({bias_comment}) | Chosen: {len(sample)} | Total:  {len(self.df)}")
         for i, row in sample.iterrows():
             if english_first:
                 meaning = row['Meaning']
@@ -180,7 +214,7 @@ class KoreanMnemonicsManager:
                 print(krword)
                 _ = input("Press Enter to Reveal")
                 self.recall_mnemonic(krword)
-            print('-'*100)
+            print(DIVIDER)
 
 def main():
     # Prerequisites 
@@ -188,29 +222,34 @@ def main():
         os.mkdir(IMPORTS)
     
     parser = argparse.ArgumentParser(description="Manage Korean mnemonics.")
-    parser.add_argument('--recall', help="Recall a mnemonic by Korean or English word.")
+    parser.add_argument('-r', '--recall', help="Recall a mnemonic by Korean or English word.")
     parser.add_argument('--anki', action='store_true', help="Export to Anki CSV.")
-    parser.add_argument('--english_first', action='store_true', help="Reverse card order (English → Korean).")
-    parser.add_argument('--add', help="Import mnemonics from a JSON file.")
-    parser.add_argument('--recent', type=int, help="Get the most recently added mnemonics", default=0)
-    parser.add_argument('--stats', action='store_true', help="View stats on how many words you have learned and when.")
-    parser.add_argument('--test', type=int, help="Randomly returns n korean words (use --english_first for english | use -1 for all)", default=0)
+    parser.add_argument('-e', '--english_first', action='store_true', help="Reverse card order (English → Korean).")
+    parser.add_argument('-a', '--add', help="Import mnemonics from a JSON file.")
+    parser.add_argument('-l', '--last', type=int, help="Get the most recently added mnemonics", default=0)
+    parser.add_argument('-s', '--stats', action='store_true', help="View stats on how many words you have learned and when.")
+    parser.add_argument('-t', '--test', type=int, help="Randomly returns n korean words (use --english_first for english | use -1 for all)", default=0)
+    parser.add_argument('-b', '--bias', type=float, help="""Used with --test. Float between -1 and 1.
+-1: Favor older words.
+0: Uniform sampling.
+1: Favor newer words.""", default=0)
     args = parser.parse_args()
 
     manager = KoreanMnemonicsManager()
 
-    if args.recall:
-        manager.recall_mnemonic(args.recall)
-    if args.anki:
-        manager.export_to_anki_csv(reverse=args.english_first)
-    if args.add:
-        manager.bulk_add_from_json(args.add)
-    if args.recent:
-        manager.get_recent(args.recent)
     if args.stats:
         manager.get_stats()
-    if args.test:
-        manager.test(args.test, args.english_first)
+
+    if args.recall:
+        manager.recall_mnemonic(args.recall)
+    elif args.anki:
+        manager.export_to_anki_csv(reverse=args.english_first)
+    elif args.add:
+        manager.bulk_add_from_json(args.add)
+    elif args.last:
+        manager.get_last(args.last)
+    elif args.test:
+        manager.test(args.test, args.english_first, args.bias)
 
 if __name__ == "__main__":
     main()
