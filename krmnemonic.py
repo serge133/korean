@@ -67,7 +67,7 @@ class KoreanMnemonicsManager:
 
     def export_to_anki_csv(self, anki_csv_path=ANKI_CSV, reverse=False):
         # Make a copy of the DataFrame and fill NaN values with empty strings
-        anki_df = self.df.copy().fillna('')
+        anki_df = self.df.sample(len(self.df)).copy().fillna('')
         if reverse:
             anki_df['Front'] = anki_df['Meaning']
             anki_df['Back'] = (
