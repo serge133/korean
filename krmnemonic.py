@@ -63,7 +63,6 @@ class KoreanMnemonicsManager:
     def get_last(self, n: int = 5):
         recent = self.df.tail(n)
         for _, row in recent.iterrows():
-            print(DIVIDER)
             self.recall_mnemonic(row['Korean Word'])
 
     def export_to_anki_csv(self, anki_csv_path=ANKI_CSV, reverse=False):
