@@ -183,23 +183,31 @@ class KoreanMnemonicsManager:
         """
         choose = n if n > 0 else len(self.df)
         num_rows = len(self.df)
-        indices = np.arange(num_rows) + 1
+        indices = np.arange(num_rows) + 100 # Ensure no 0 probability
+
+        # Bias is between 0 and 1, and the steepness should be no more than 0.1. So divide by 10 
+        bias /= 10
+        weights = np.exp(abs(bias) * indices)
+
 
          # Create a base exponential distribution (favoring newer words)
         #  If bias > 0, will favor newer words, if less than 0 will favor older words
         # weights = np.exp(abs(bias) * indices)
-        weights = 1 + abs(bias) * (indices / num_rows)
+
 
         if bias < 0:
             weights = np.flip(weights)
 
         # Normalize weights
         # ! No need 
-        # weights = weights / weights.sum()
-        # print(bias)
-        # plt.plot(indices, weights)
-        # plt.show()
-        # exit()
+        weights = weights / weights.sum()
+        print(bias)
+        plt.plot(indices, weights)
+        # 0.1 is extreme
+
+        plt.ylim((0, 0.1))
+        plt.show()
+        exit()
 
         # Sample
         sample = self.df.sample(n=min(num_rows, choose), weights=weights)
