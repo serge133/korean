@@ -5,12 +5,14 @@ import os, shutil
 import json
 import argparse
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 IMPORTS = os.path.join(DIR, "imports")
 EXPORT_FILE_PD = os.path.join(DIR, "korean_mnemonics.csv")
 ANKI_CSV = f"anki_{datetime.now().timestamp()}.csv"
 DIVIDER = '\n' + ('-' * 100) + '\n'
+MIN_PROB = 0.05
 
 class KoreanMnemonicsManager:
     def __init__(self, csv_path=EXPORT_FILE_PD):
@@ -168,8 +170,8 @@ class KoreanMnemonicsManager:
 
     def test(self, n: int, english_first: bool, bias: float = 0.0):
         """
-        Returns n random korean words (english if english_first flag enabled),
-        with optional bias towards newer or older words.
+        Returns n random Korean words (English if english_first flag enabled),
+        with optional bias towards newer or older words using a spaced-repetition-like distribution.
 
         Args:
             n: Number of words to sample.
@@ -179,30 +181,38 @@ class KoreanMnemonicsManager:
                 0: Uniform sampling.
                 1: Favor newer words.
         """
-        # Normalize timestamps to [0, 1] range
-        timestamps = self.df['Timestamp']
-        min_ts, max_ts = timestamps.min(), timestamps.max()
-        normalized_ts = (timestamps - min_ts) / (max_ts - min_ts)
+        choose = n if n > 0 else len(self.df)
+        num_rows = len(self.df)
+        indices = np.arange(num_rows) + 1
 
-        # Calculate weights based on bias
-        if bias > 0:
-            weights = normalized_ts ** bias
-        elif bias < 0:
-            weights = (1 - normalized_ts) ** (-bias)
-        else:
-            weights = np.ones(len(timestamps))
+         # Create a base exponential distribution (favoring newer words)
+        #  If bias > 0, will favor newer words, if less than 0 will favor older words
+        # weights = np.exp(abs(bias) * indices)
+        weights = 1 + abs(bias) * (indices / num_rows)
 
-        # Normalize weights to sum to 1
-        weights = weights / weights.sum()
-        sample = self.df.sample(n=n if n > 0 else len(self.df), weights=weights)
+        if bias < 0:
+            weights = np.flip(weights)
 
+        # Normalize weights
+        # ! No need 
+        # weights = weights / weights.sum()
+        # print(bias)
+        # plt.plot(indices, weights)
+        # plt.show()
+        # exit()
+
+        # Sample
+        sample = self.df.sample(n=min(num_rows, choose), weights=weights)
+
+        # Print bias info
         bias_comment = "Uniform Sampling"
         if bias > 0:
             bias_comment = "Favor Newer Words"
         elif bias < 0:
             bias_comment = "Favor Older Words"
+        print(f"Bias: {bias} ({bias_comment}) | Chosen: {len(sample)} | Total: {len(self.df)}")
 
-        print(f"Bias: {bias} ({bias_comment}) | Chosen: {len(sample)} | Total:  {len(self.df)}")
+        # Display words
         for i, row in sample.iterrows():
             if english_first:
                 meaning = row['Meaning']
@@ -216,6 +226,7 @@ class KoreanMnemonicsManager:
                 self.recall_mnemonic(krword)
             print(DIVIDER)
 
+
 def main():
     # Prerequisites 
     if not os.path.isdir(IMPORTS):
@@ -228,7 +239,7 @@ def main():
     parser.add_argument('-a', '--add', help="Import mnemonics from a JSON file.")
     parser.add_argument('-l', '--last', type=int, help="Get the most recently added mnemonics", default=0)
     parser.add_argument('-s', '--stats', action='store_true', help="View stats on how many words you have learned and when.")
-    parser.add_argument('-t', '--test', type=int, help="Randomly returns n korean words (use --english_first for english | use -1 for all)", default=0)
+    parser.add_argument('-t', '--test', type=int, nargs='?', help="Randomly returns n korean words (use --english_first for english | no number is all)", default=0, const=-1)
     parser.add_argument('-b', '--bias', type=float, help="""Used with --test. Float between -1 and 1.
 -1: Favor older words.
 0: Uniform sampling.
