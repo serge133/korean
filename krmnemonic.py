@@ -201,13 +201,13 @@ class KoreanMnemonicsManager:
         # Normalize weights
         # ! No need 
         weights = weights / weights.sum()
-        print(bias)
-        plt.plot(indices, weights)
-        # 0.1 is extreme
+        # print(bias)
+        # plt.plot(indices, weights)
+        # # 0.1 is extreme
 
-        plt.ylim((0, 0.1))
-        plt.show()
-        exit()
+        # plt.ylim((0, 0.1))
+        # plt.show()
+        # exit()
 
         # Sample
         sample = self.df.sample(n=min(num_rows, choose), weights=weights)
